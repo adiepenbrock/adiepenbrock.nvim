@@ -134,6 +134,22 @@
           desc = "[C]ode [F]ormat";
         };
       }
+      {
+        mode = "n";
+        key = "<leader>tt";
+        action = ":FloatermNew --autoclose=2 --height=0.9 --width=0.9 zsh<CR>";
+        options = {
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>lg";
+        action = ":FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazygit<CR>";
+        options = {
+          silent = true;
+        };
+      }
     ];
 
     plugins = {
@@ -321,22 +337,6 @@
         timeout = 1000;
         topDown = true;
       };
-
-      # harpoon = {
-      # 	enable = true;
-      # 	enableTelescope = true;
-      # 	keymapsSilent = true;
-      # 	keymaps = {
-      # 		addFile = "<leader>ha";
-      # 		toggleQuickMenu = "<C-e>";
-      # 		navFile = {
-      # 			"1" = "<leader>hj";
-      # 			"2" = "<leader>hk";
-      # 			"3" = "<leader>hl";
-      # 			"4" = "<leader>hm";
-      # 		};
-      # 	};
-      # };
 
       nvim-autopairs.enable = true;
 
@@ -536,6 +536,10 @@
       cmp-nvim-lsp = {enable = true;};
       cmp-buffer = {enable = true;};
       cmp_luasnip = {enable = true;};
+
+      floaterm = {
+        enable = true;
+      };
     };
 
     extraConfigLua = ''

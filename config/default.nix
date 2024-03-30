@@ -1,11 +1,7 @@
 {pkgs, ...}: {
-  imports = [
-  ];
-
-
   config = {
-	globals.mapLeader = " ";
-	globals.mapLocalLeader = " ";
+	globals.mapleader = " ";
+	globals.maplocalleader = " ";
 
 	opts = {
 		number = true;
@@ -37,6 +33,14 @@
 		scrolloff = 10;
 
 		hlsearch = true;
+
+        foldcolumn = "0";
+        foldlevel = 99;
+        foldlevelstart = 99;
+        foldenable = true;
+
+        encoding = "utf-8";
+        fileencoding = "utf-8";
 	};
 
 	colorschemes = {
@@ -60,6 +64,12 @@
 			key = "<Esc>";
 			action = "<cmd>nohlsearch<CR>";
 		}
+        {
+            mode = "n";
+            key = "<C-x>";
+            action = "<cmd>Ex<CR>";
+            options.desc = "E[x]it the currently open buffer";
+        }
 		{
 			mode = "n";
 			key = "<leader>e";
@@ -68,6 +78,36 @@
 				desc = "Show diagnostic [E]rror messages";
 			};
 		}
+        {
+            mode = "v";
+            key = "J";
+            action = ":m '>+1<CR>gv=gv";
+            options.desc = "Use move command when line is highlighted";
+        }
+        {
+            mode = "v";
+            key = "K";
+            action = ":m '>-2<CR>gv=gv";
+            options.desc = "Use move command when line is highlighted";
+        }
+        {
+            mode = "n";
+            key = "k";
+            action = "v:count == 0 ? 'gkzz' : 'kzz'";
+    	    options = {
+    	    	expr = true;
+        		silent = true;
+	         };
+        }
+        {
+            mode = "n";
+            key = "j";
+            action = "v:count == 0 ? 'gjzz' : 'jzz'";
+	        options = {
+	        	expr = true;
+		        silent = true;
+	        };
+        }
 		{
 			mode = "n";
 			key = "<leader>ut";
@@ -77,6 +117,14 @@
 				desc = "[U]ndo [T]ree";
 			};
 		}
+        {
+            mode = "n";
+            key = "<leader>un";
+            action = ''<cmd>lua require("notify").dismiss({ silent = true, pending = true })<CR>'';
+            options = {
+                desc = "Dismiss All Notifications";
+            };
+        }
 	];
 
 	plugins = {
@@ -256,6 +304,14 @@
 				backend = "nui";
 			};
 		};
+
+        notify = {
+            enable = true;
+            fps = 60;
+            render = "default";
+            timeout = 1000;
+            topDown = true;
+        };
 		
 		# harpoon = {
 		# 	enable = true;
@@ -387,6 +443,72 @@
 				};
 			};
 		};
+
+        cmp = {
+            enable = true;
+            settings = {
+                experimental = {
+                    ghost_text = true;
+                };
+                performance = {
+                    debounce = 60;
+                    fetchingTimeout = 200;
+                    maxViewEntries = 30;
+                };
+                snippet = { expand = "luasnip"; };
+                formatting = { fields = ["kind" "abbr" "menu"];};
+                sources =  [
+                    {name = "nvim_lsp";}
+                    {
+                        name = "buffer";
+                        option.get_nufnrs.__raw = "vim.api.nvim_list_bufs";
+                        keywordLength = 3;
+                    }
+                    {
+                        name = "luasnip";
+                        keywordLength = 3;
+                    }
+                ];
+
+                window = {
+                    completion = {
+                        border = "rounded";
+                        winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None";
+                    };
+                    documentation = {border = "rounded";};
+                };
+
+                mapping = {
+                    "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+                    "<C-j>" = "cmp.mapping.select_next_item()";
+                    "<C-k>" = "cmp.mapping.select_prev_item()";
+                    "<CR>" = "cmp.mapping.confirm({ select = true })";
+                    "<S-CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })";
+                };
+            };
+        };
+
+        cmp-nvim-lsp = { enable = true; };
+        cmp-buffer = { enable = true; };
+        cmp_luasnip = { enable = true; };
 	};
+
+    extraConfigLua = ''
+        vim.api.nvim_create_autocmd('TextYankPost', {
+            desc = "Highlight when yanking (copying) text",
+            group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+            callback = function()
+                vim.highlight.on_yank()
+            end,
+        })
+
+        require("telescope").setup{
+            pickers = {
+                colorscheme = {
+                    enable_preview = true
+                }
+            }
+        }
+    '';
   };
 }

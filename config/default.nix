@@ -502,6 +502,9 @@
           };
           snippet = {expand = "luasnip";};
           formatting = {fields = ["kind" "abbr" "menu"];};
+          completion = {
+            completeopt = "menu,menuone,noinsert";
+          };
           sources = [
             {name = "nvim_lsp";}
             {
@@ -536,6 +539,16 @@
       cmp-nvim-lsp = {enable = true;};
       cmp-buffer = {enable = true;};
       cmp_luasnip = {enable = true;};
+
+      copilot-cmp = {
+        enable = true;
+      };
+
+      copilot-lua = {
+        enable = true;
+        suggestion = {enabled = false;};
+        panel = {enabled = false;};
+      };
 
       floaterm = {
         enable = true;

@@ -500,7 +500,13 @@
             fetchingTimeout = 200;
             maxViewEntries = 30;
           };
-          snippet = {expand = "luasnip";};
+          snippet = {
+            expand = ''
+              function(args)
+                luasnip.lsp_expand(args.body)
+              end
+            '';
+          };
           formatting = {fields = ["kind" "abbr" "menu"];};
           completion = {
             completeopt = "menu,menuone,noinsert";
@@ -539,6 +545,14 @@
       cmp-nvim-lsp = {enable = true;};
       cmp-buffer = {enable = true;};
       cmp_luasnip = {enable = true;};
+
+      luasnip = {
+        enable = true;
+        extraConfig = {
+          enable_autosnippets = true;
+          store_selection_keys = "<Tab>";
+        };
+      };
 
       copilot-cmp = {
         enable = true;

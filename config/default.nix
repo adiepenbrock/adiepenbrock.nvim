@@ -489,9 +489,18 @@
         };
       };
 
+      luasnip = {
+        enable = true;
+        extraConfig = {
+          enable_autosnippets = true;
+          store_selection_keys = "<Tab>";
+        };
+      };
+
       cmp = {
         enable = true;
         settings = {
+          autoEnableSources = true;
           experimental = {
             ghost_text = true;
           };
@@ -501,11 +510,7 @@
             maxViewEntries = 30;
           };
           snippet = {
-            expand = ''
-              function(args)
-                luasnip.lsp_expand(args.body)
-              end
-            '';
+            expand = "function(args) require('luasnip').lsp_expand(args.body) end";
           };
           formatting = {fields = ["kind" "abbr" "menu"];};
           completion = {
@@ -546,14 +551,6 @@
       cmp-buffer = {enable = true;};
       cmp_luasnip = {enable = true;};
 
-      luasnip = {
-        enable = true;
-        extraConfig = {
-          enable_autosnippets = true;
-          store_selection_keys = "<Tab>";
-        };
-      };
-
       copilot-cmp = {
         enable = true;
       };
@@ -570,21 +567,77 @@
     };
 
     extraConfigLua = ''
-      vim.api.nvim_create_autocmd('TextYankPost', {
-          desc = "Highlight when yanking (copying) text",
-          group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-          callback = function()
-              vim.highlight.on_yank()
-          end,
-      })
+        vim.api.nvim_create_autocmd('TextYankPost', {
+            desc = "Highlight when yanking (copying) text",
+            group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+            callback = function()
+                vim.highlight.on_yank()
+            end,
+        })
 
-      require("telescope").setup{
-          pickers = {
-              colorscheme = {
-                  enable_preview = true
-              }
-          }
-      }
+        require("telescope").setup{
+            pickers = {
+                colorscheme = {
+                    enable_preview = true
+                }
+            }
+        }
+
+        luasnip = require("luasnip")
+        kind_icons = {
+          Text = "󰊄",
+          Method = "",
+          Function = "󰡱",
+          Constructor = "",
+          Field = "",
+          Variable = "󱀍",
+          Class = "",
+          Interface = "",
+          Module = "󰕳",
+          Property = "",
+          Unit = "",
+          Value = "",
+          Enum = "",
+          Keyword = "",
+          Snippet = "",
+          Color = "",
+          File = "",
+          Reference = "",
+          Folder = "",
+          EnumMember = "",
+          Constant = "",
+          Struct = "",
+          Event = "",
+          Operator = "",
+          TypeParameter = "",
+        }
+
+      local cmp = require'cmp'
+
+        -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+        cmp.setup.cmdline({'/', "?" }, {
+            sources = {
+            { name = 'buffer' }
+            }
+            })
+
+      -- Set configuration for specific filetype.
+        cmp.setup.filetype('gitcommit', {
+            sources = cmp.config.sources({
+                { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+                }, {
+                { name = 'buffer' },
+                })
+            })
+
+      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+        cmp.setup.cmdline(':', {
+            sources = cmp.config.sources({
+                { name = 'path' }
+                }, {
+                { name = 'cmdline' }
+                }),
+            })
     '';
   };
 }

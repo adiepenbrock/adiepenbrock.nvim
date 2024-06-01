@@ -46,14 +46,16 @@
     colorschemes = {
       catppuccin = {
         enable = true;
-        flavour = "frappe";
-        integrations = {
-          cmp = true;
-          noice = true;
-          gitsigns = true;
-          which_key = true;
-          treesitter = true;
-          treesitter_context = true;
+        settings = {
+          flavour = "frappe";
+          integrations = {
+            cmp = true;
+            noice = true;
+            gitsigns = true;
+            which_key = true;
+            treesitter = true;
+            treesitter_context = true;
+          };
         };
       };
     };
@@ -456,35 +458,37 @@
             enable = true;
           };
         };
-        defaults = {
-          layout_config = {
-            horizontal = {
-              prompt_position = "top";
+        settings = {
+          defaults = {
+            layout_config = {
+              horizontal = {
+                prompt_position = "top";
+              };
             };
+            sorting_strategy = "ascending";
           };
-          sorting_strategy = "ascending";
-        };
 
-        keymaps = {
-          "<leader>sk" = {
-            action = "keymaps, {}";
-            desc = "[S]earch [K]eymaps";
-          };
-          "<leader>sf" = {
-            action = "find_files, {}";
-            desc = "[S]earch [F]iles";
-          };
-          "<leader>ss" = {
-            action = "builtin, {}";
-            desc = "[S]earch [S]elect Telecscope";
-          };
-          "<leader>sw" = {
-            action = "grep_string, {}";
-            desc = "[S]earch current [W]ord";
-          };
-          "<leader>sg" = {
-            action = "live_grep, {}";
-            desc = "[S]earch by [G]rep";
+          keymaps = {
+            "<leader>sk" = {
+              action = "keymaps, {}";
+              desc = "[S]earch [K]eymaps";
+            };
+            "<leader>sf" = {
+              action = "find_files, {}";
+              desc = "[S]earch [F]iles";
+            };
+            "<leader>ss" = {
+              action = "builtin, {}";
+              desc = "[S]earch [S]elect Telecscope";
+            };
+            "<leader>sw" = {
+              action = "grep_string, {}";
+              desc = "[S]earch current [W]ord";
+            };
+            "<leader>sg" = {
+              action = "live_grep, {}";
+              desc = "[S]earch by [G]rep";
+            };
           };
         };
       };

@@ -153,6 +153,53 @@
         };
       }
 
+      # telescope specific stuff
+      {
+        mode = "n";
+        key = "<leader>sk";
+        action = "<cmd>Telescope keymaps<CR>";
+        options = {
+          silent = true;
+          desc = "[S]earch [K]eymaps";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>sf";
+        action = "<cmd>Telescope find_files<CR>";
+        options = {
+          silent = true;
+          desc = "[S]earch [F]iles";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>ss";
+        action = "<cmd>Telescope builtin<CR>";
+        options = {
+          silent = true;
+          desc = "[S]earch [S]elect Telecscope";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>sw";
+        action = "<cmd>Telescope grep_string<CR>";
+        options = {
+          silent = true;
+          desc = "[S]earch current [W]ord";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>sg";
+        action = "<cmd>Telescope live_grep<CR>";
+        options = {
+          silent = true;
+          desc = "[S]earch by [G]rep";
+        };
+      }
+
       # copilot keymaps
       {
         mode = "n";
@@ -477,29 +524,6 @@
               };
             };
             sorting_strategy = "ascending";
-          };
-
-          keymaps = {
-            "<leader>sk" = {
-              action = "keymaps, {}";
-              desc = "[S]earch [K]eymaps";
-            };
-            "<leader>sf" = {
-              action = "find_files, {}";
-              desc = "[S]earch [F]iles";
-            };
-            "<leader>ss" = {
-              action = "builtin, {}";
-              desc = "[S]earch [S]elect Telecscope";
-            };
-            "<leader>sw" = {
-              action = "grep_string, {}";
-              desc = "[S]earch current [W]ord";
-            };
-            "<leader>sg" = {
-              action = "live_grep, {}";
-              desc = "[S]earch by [G]rep";
-            };
           };
         };
       };

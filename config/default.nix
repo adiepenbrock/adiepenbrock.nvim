@@ -152,6 +152,17 @@
           silent = true;
         };
       }
+
+      # copilot keymaps
+      {
+        mode = "n";
+        key = "<leader>ap";
+        action = "<cmd>Copilot panel<CR>";
+        options = {
+          silent = true;
+          desc = "[A]i [P]anel";
+        };
+      }
     ];
 
     plugins = {
@@ -555,14 +566,18 @@
       cmp-buffer = {enable = true;};
       cmp_luasnip = {enable = true;};
 
-      copilot-cmp = {
-        enable = true;
-      };
+      # copilot-cmp = {
+      #   enable = true;
+      # };
+      #
+      # copilot-lua = {
+      #   enable = true;
+      #   suggestion = {enabled = false;};
+      #   panel = {enabled = false;};
+      # };
 
-      copilot-lua = {
+      copilot-vim = {
         enable = true;
-        suggestion = {enabled = false;};
-        panel = {enabled = false;};
       };
 
       floaterm = {

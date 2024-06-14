@@ -489,6 +489,7 @@
           "javascript"
           "lua"
           "luadoc"
+          "latex"
           "markdown"
           "nix"
           "proto"
@@ -502,6 +503,10 @@
       };
 
       treesitter-context = {
+        enable = true;
+      };
+
+      vimtex = {
         enable = true;
       };
 

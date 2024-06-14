@@ -444,6 +444,10 @@
             enable = true;
           };
 
+          texlab = {
+            enable = true;
+          };
+
           rust-analyzer = {
             enable = true;
             installCargo = true;
@@ -503,10 +507,6 @@
       };
 
       treesitter-context = {
-        enable = true;
-      };
-
-      vimtex = {
         enable = true;
       };
 

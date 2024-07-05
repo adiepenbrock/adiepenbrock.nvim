@@ -569,6 +569,7 @@
               option.get_nufnrs.__raw = "vim.api.nvim_list_bufs";
               keywordLength = 3;
             }
+            {name = "copilot";}
             {
               name = "luasnip";
               keywordLength = 3;
@@ -597,18 +598,21 @@
       cmp-buffer = {enable = true;};
       cmp_luasnip = {enable = true;};
 
-      # copilot-cmp = {
-      #   enable = true;
-      # };
-      #
-      # copilot-lua = {
-      #   enable = true;
-      #   suggestion = {enabled = false;};
-      #   panel = {enabled = false;};
-      # };
-
-      copilot-vim = {
+      copilot-cmp = {
         enable = true;
+      };
+
+      copilot-lua = {
+        enable = true;
+        suggestion = {
+          enabled = false;
+          # keymap = {
+          #   accept = "<CR>";
+          # };
+        };
+        panel = {
+          enabled = false;
+        };
       };
 
       floaterm = {

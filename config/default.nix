@@ -462,7 +462,9 @@
       none-ls = {
         enable = true;
         enableLspFormat = true;
-        updateInInsert = true;
+        settings = {
+          update_in_insert = true;
+        };
         sources = {
           code_actions = {
             gitsigns.enable = true;
